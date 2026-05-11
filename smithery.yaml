@@ -1,0 +1,29 @@
+# Smithery manifest for the Auxen MCP server.
+# Smithery indexes from this file when the repo is connected via
+# https://smithery.ai/new — runtime: remote means we point at the
+# already-deployed endpoint instead of having Smithery host or proxy.
+
+name: auxen
+displayName: Auxen
+description: >
+  Provision private AI model endpoints on dedicated GPU infrastructure.
+  Pay-per-minute open-source models (Llama 3.1, Qwen 2.5, Mistral, Gemma 2,
+  Phi-3). Each instance is fully private — no shared inference, no
+  third-party routing.
+homepage: https://auxen.ai
+license: proprietary
+
+runtime: remote
+url: https://api.auxen.ai/mcp
+
+# The same endpoint accepts OAuth 2.1 access tokens or legacy
+# `auxen_live_*` API keys. Smithery's UI defaults to OAuth for remote
+# servers; clients that don't go through the consent flow can paste
+# a key directly.
+auth:
+  type: oauth2
+  authorizationUrl: https://api.auxen.ai/oauth/authorize
+  tokenUrl: https://api.auxen.ai/oauth/token
+  registrationUrl: https://api.auxen.ai/oauth/register
+  scopes:
+    mcp: Manage Auxen instances and read billing
